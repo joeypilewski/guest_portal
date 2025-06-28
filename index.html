@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Opening your Uber voucher…</title>
+  <title>Apply Your Uber Voucher</title>
   <style>
     html,body{height:100%;margin:0}
     body{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;text-align:center;padding:0 1rem}
@@ -12,31 +12,9 @@
   </style>
 </head>
 <body>
-  <h1>Opening your Uber voucher…</h1>
-  <noscript>
-    <p>This page needs JavaScript to redirect. Please tap the button below.</p>
-  </noscript>
-  <a class="btn" id="fallbackLink" href="https://m.uber.com/ul/?action=applyPromo&promo=RBSZYDNZRME">Click here to apply the voucher to your Uber account</a>
-
-  <script>
-    (function(){
-      if (window.__voucherRedirectRan) return; // idempotent guard
-      window.__voucherRedirectRan = true;
-
-      const promoCode      = "RBSZYDNZRME";
-      const universalLink  = `https://m.uber.com/ul/?action=applyPromo&promo=${promoCode}`;
-      const deepLink       = `uber://?action=applyPromo&promo=${promoCode}`;
-
-      // Attempt the Universal Link first – allowed inside iOS CNA & Android.
-      window.location.replace(universalLink);
-
-      // Fallback after 4 s: if we’re still visible, try the custom scheme.
-      setTimeout(() => {
-        if (document.visibilityState !== 'hidden') {
-          window.location.href = deepLink;
-        }
-      }, 4000);
-    })();
-  </script>
+  <h1>Apply your Uber voucher</h1>
+  <a class="btn" href="https://m.uber.com/ul/?action=applyPromo&promo=RBSZYDNZRME">
+    Click here to apply the voucher to your Uber account
+  </a>
 </body>
 </html>
