@@ -16,16 +16,9 @@
   <noscript>
     <p>This page needs JavaScript to redirect. Please tap the button below.</p>
   </noscript>
-  <a class="btn" id="fallbackLink" href="https://m.uber.com/ul/?action=applyPromo&promo=RBSZYDNZRME">Tap here if Uber doesn’t open</a>
+  <a class="btn" id="fallbackLink" href="https://m.uber.com/ul/?action=applyPromo&promo=RBSZYDNZRME">Click here to apply the voucher to your Uber account</a>
 
   <script>
-    /**
-     * iOS captive-portal WebSheet blocks custom schemes unless there is
-     * user interaction. First try the Universal Link (HTTPS) which is allowed
-     * even inside the sheet. If that fails (old Android or app not installed),
-     * fall back to the custom scheme after a few seconds – but only if the
-     * browser is still on this page.
-     */
     (function(){
       if (window.__voucherRedirectRan) return; // idempotent guard
       window.__voucherRedirectRan = true;
