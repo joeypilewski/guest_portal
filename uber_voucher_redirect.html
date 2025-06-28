@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Uber Voucher Redirect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Simple full‑screen loading state */
+    html,body {height:100%;margin:0;}
+    body {display:flex;align-items:center;justify-content:center;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;}
+    h1 {font-size:1.25rem;font-weight:600;}
+  </style>
+</head>
+<body>
+  <h1>Opening Uber…</h1>
+
+  <script>
+    /**
+     * We wrap everything in an IIFE and guard with a flag so that if the script
+     * is injected more than once (or the user refreshes via UniFi portal which
+     * sometimes re‑injects the same HTML fragment) we don’t attempt to redeclare
+     * the same `const` variables, which would trigger the “duplicate variable”
+     * SyntaxError you saw.
+     */
+    (function () {
+      if (window.__uberVoucherRedirectRan) return; // idempotent guard
+      window.__uberVoucherRedirectRan = true;
+
+      // --- CONFIG -----------------------------------------------------------
+      const PROMO_CODE = "RBSZYDNZRME"; // <-- change this when you generate a new voucher
+      // ---------------------------------------------------------------------
+
+      const universalLink = `https://m.uber.com/ul/?action=applyPromo&promo=${PROMO_CODE}`;
+      const deepLink      = `uber://?action=applyPromo&promo=${PROMO_CODE}`;
+
+      // Attempt the Universal Link first – this opens the Uber app on iOS/Android
+      // if installed, otherwise stays on the mobile web experience.
+      window.location.replace(universalLink);
+
+      // Fallback: after 4 s, if the page is still visible, try the custom scheme.
+      // Very old Android builds sometimes ignore Universal Links.
+      setTimeout(() => {
+        // If the browser is still on *this* origin we assume the UL failed.
+        if (document.visibilityState !== 'hidden') {
+          window.location.href = deepLink;
+        }
+      }, 4000);
+    })();
+  </script>
+</body>
+</html>
